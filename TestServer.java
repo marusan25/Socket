@@ -17,7 +17,7 @@ public class TestServer {
 		// try-with-resources構文を利用(close処理の記述が不要)
 		try(
 				// 指定したポート番号でサーバ用TCPソケットを作成
-				ServerSocket serverSocket = new ServerSocket();
+				ServerSocket serverSocket = new ServerSocket(LISTEN_PORT);
 				Socket socket = serverSocket.accept();
 				PrintWriter printWriter = new PrintWriter(
 					new OutputStreamWriter(socket.getOutputStream(), "UTF-8")
