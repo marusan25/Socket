@@ -22,12 +22,23 @@ public class TestClient {
 			BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(socket.getInputStream(),"UTF-8"));
 		) {
-			// サーバから送信されたデータを1行読み込む(受信)
-			String result = bufferedReader.readLine();
+			// サーバから10回データを受信する
+			for(int i = 0; i < 10; i++) {
+			String result = bufferedReader.readLine(); // データ受信
 			// 受信した結果をコンソールに出力
-			System.out.println("結果：" + result);
+			if (result != null) {
+				System.out.println("結果：" + result);
+			}else {
+				System.out.println("サーバーからのデータがありません");
+				break; // データがなければループを抜ける
+				}
+			}
+			
+			// 全てのデータを受信し終わったらメッセージを表示
+			System.out.println("接続が終了しました");
 			
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 			System.out.println("通信中にエラーが発生しました");
 		}
 	}
