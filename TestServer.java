@@ -38,7 +38,7 @@ public class TestServer {
 	
 	private static int getNumber() {
 		int[] numbers = {1, 2, 3, 4};
-		return numbers[new Random().nextInt(1, 5)];
+		return numbers[new Random().nextInt(1, 4)];
 	}
 
 }
