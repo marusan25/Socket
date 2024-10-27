@@ -11,6 +11,9 @@ public class TestServer {
 		// 受信用ソケットのポート番号の設定
 		final int LISTEN_PORT = 50000;
 		
+		// 処理を行った回数
+		int count = 0;
+		
 		System.out.println("サーバー実行中");
 		
 		// ネットワーク処理は例外処理が必須
@@ -24,13 +27,18 @@ public class TestServer {
 				);
 				
 		) {
+			// 10回データを送信する
+			for(int i = 0; i < 10; i++) {
 			int result = getNumber();
-			printWriter.println(result);
+			printWriter.println(result); // データ送信
 			printWriter.flush();
 			
-			System.out.println("送信した値：" + result);
-
-		}catch (IOException e) {
+			System.out.printf("送信した値(%d回)：%s%n", ++count,result);
+			
+			// 少し待機することで、クライアントがデータを受け取る間隔を作る
+			Thread.sleep(500); // 0.5秒待機
+			}
+		}catch (IOException | InterruptedException e) {
 			System.out.println("通信エラー発生");
 		}
 
@@ -38,7 +46,7 @@ public class TestServer {
 	
 	private static int getNumber() {
 		int[] numbers = {1, 2, 3, 4};
-		return numbers[new Random().nextInt(1, 5)];
+		return numbers[new Random().nextInt(4)];
 	}
 
 }
